@@ -34,7 +34,7 @@ def moodle_notify():
                 for content in module["contents"]:
                     if int(content["timemodified"]) >= currentTime-dayTime:
                         lotify.send_message(
-                            lineToken, f"{course['fullname']}\n{content['filename']}\nadd to moodle")
+                            lineToken, f"{course['fullname']}\n{content['filename']}\nupdate on moodle")
         assignParams["courseids[0]"] = course["id"]
         assignments = requests.get(url, assignParams).json()[
             "courses"][0]["assignments"]
@@ -43,7 +43,7 @@ def moodle_notify():
                 dueDate = datetime.datetime.utcfromtimestamp(
                     int(assingment['duedate'])+GMT8).strftime('%Y-%m-%d %H:%M:%S')
                 lotify.send_message(
-                    lineToken, f"{course['fullname']}\n{assingment['name']}\nDue: {dueDate}\nadd to moodle")
+                    lineToken, f"{course['fullname']}\n{assingment['name']}\nDue: {dueDate}\nupdate on moodle")
 
 
 if __name__ == "__main__":
