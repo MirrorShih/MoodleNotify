@@ -1,5 +1,6 @@
 import requests
-import json
+import datetime
+import time
 import os
 from lotify.client import Client
 
@@ -9,6 +10,9 @@ def moodle_notify():
     moodleToken = os.environ.get("MOODLE_TOKEN")
     lineToken = os.environ.get("LINE_TOKEN")
     url = f"{os.environ.get('MOODLE_URL','https://moodle.ntust.edu.tw/')}webservice/rest/server.php"
+    currentTime = int(time.time())
+    dayTime = 86400
+    GMT8 = 28800
     params = {"moodlewsrestformat": "json",
               "wsfunction": "core_webservice_get_site_info", "wstoken": moodleToken}
     userId = requests.get(url, params).json()["userid"]
@@ -17,23 +21,29 @@ def moodle_notify():
     courses = requests.get(url, params).json()
     params["wsfunction"] = "core_course_get_contents"
     params.pop("userid")
+    assignParams = {"moodlewsrestformat": "json",
+                    "wsfunction": "mod_assign_get_assignments", "wstoken": moodleToken}
     for course in courses:
         params["courseid"] = course["id"]
         courseContent = requests.get(url, params).json()
-        if os.path.isfile(f"courses/{course['id']}.json"):
-            with open(f"courses/{course['id']}.json", "r") as f:
-                data = json.load(f)
-                for i in range(len(data)):
-                    modules = data[i]["modules"]
-                    new_modules = courseContent[i]["modules"]
-                    for module in new_modules:
-                        if module not in modules:
-                            lotify.send_message(
-                                lineToken, f"{course['fullname']}\n{module['name']}\n add to moodle")
-        if not os.path.exists("courses"):
-            os.mkdir("courses")
-        with open(f"courses/{course['id']}.json", "w") as f:
-            json.dump(courseContent, f)
+        for i in courseContent:
+            modules = i["modules"]
+            for module in modules:
+                if module.get("contents") == None:
+                    continue
+                for content in module["contents"]:
+                    if int(content["timemodified"]) >= currentTime-dayTime:
+                        lotify.send_message(
+                            lineToken, f"{course['fullname']}\n{content['filename']}\nadd to moodle")
+        assignParams["courseids[0]"] = course["id"]
+        assignments = requests.get(url, assignParams).json()[
+            "courses"][0]["assignments"]
+        for assingment in assignments:
+            if int(assingment["timemodified"]) >= currentTime-dayTime:
+                dueDate = datetime.datetime.utcfromtimestamp(
+                    int(assingment['duedate'])+GMT8).strftime('%Y-%m-%d %H:%M:%S')
+                lotify.send_message(
+                    lineToken, f"{course['fullname']}\n{assingment['name']}\nDue: {dueDate}\nadd to moodle")
 
 
 if __name__ == "__main__":
