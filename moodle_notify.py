@@ -21,8 +21,7 @@ def moodle_notify():
     courses = requests.get(url, params).json()
     params["wsfunction"] = "core_course_get_contents"
     params.pop("userid")
-    assignParams = {"moodlewsrestformat": "json",
-                    "wsfunction": "mod_assign_get_assignments", "wstoken": moodleToken}
+    typeParams = {"moodlewsrestformat": "json", "wstoken": moodleToken}
     for course in courses:
         params["courseid"] = course["id"]
         courseContent = requests.get(url, params).json()
@@ -34,16 +33,27 @@ def moodle_notify():
                 for content in module["contents"]:
                     if int(content["timemodified"]) >= currentTime-dayTime:
                         lotify.send_message(
-                            lineToken, f"{course['fullname']}\n{content['filename']}\nupdate on moodle")
-        assignParams["courseids[0]"] = course["id"]
-        assignments = requests.get(url, assignParams).json()[
+                            lineToken, f"{course['fullname']}\n{content['filename']}\nUpdate on moodle")
+        # assignments notify
+        typeParams["wsfunction"] = "mod_assign_get_assignments"
+        typeParams["courseids[0]"] = course["id"]
+        assignments = requests.get(url, typeParams).json()[
             "courses"][0]["assignments"]
         for assingment in assignments:
             if int(assingment["timemodified"]) >= currentTime-dayTime:
                 dueDate = datetime.datetime.utcfromtimestamp(
                     int(assingment['duedate'])+GMT8).strftime('%Y-%m-%d %H:%M:%S')
                 lotify.send_message(
-                    lineToken, f"{course['fullname']}\n{assingment['name']}\nDue: {dueDate}\nupdate on moodle")
+                    lineToken, f"{course['fullname']}\n{assingment['name']}\nDue: {dueDate}\nUpdate on moodle")
+        # quiz notify
+        typeParams["wsfunction"] = "mod_quiz_get_quizzes_by_courses"
+        quizzes = requests.get(url, typeParams).json()["quizzes"]
+        for quiz in quizzes:
+            if int(quiz["timeclose"]) >= currentTime-dayTime:
+                closeTime = datetime.datetime.utcfromtimestamp(
+                    int(assingment['timeclose'])+GMT8).strftime('%Y-%m-%d %H:%M:%S')
+                lotify.send_message(
+                    lineToken, f"{course['fullname']}\n{quiz['name']}\nClose time: {closeTime}\nUpdate on moodle")
 
 
 if __name__ == "__main__":
