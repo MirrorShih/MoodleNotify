@@ -34,3 +34,7 @@ def moodle_notify():
             os.mkdir("courses")
         with open(f"courses/{course['id']}.json", "w") as f:
             json.dump(courseContent, f)
+
+
+if __name__ == "__main__":
+    moodle_notify()
