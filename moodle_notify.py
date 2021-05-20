@@ -43,7 +43,7 @@ def moodle_notify():
             if int(assingment["timemodified"]) >= currentTime-dayTime and currentTime <= int(assingment["duedate"]):
                 dueDate = datetime.datetime.utcfromtimestamp(
                     int(assingment['duedate'])+GMT8).strftime('%Y-%m-%d %H:%M:%S')
-                if assingment["duedata"] == 0:
+                if assingment["duedate"] == 0:
                     lotify.send_message(
                         lineToken, f"{course['fullname']}\n作業: {assingment['name']}\nCheck it on moodle")
                 else:
