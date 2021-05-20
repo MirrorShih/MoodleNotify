@@ -51,7 +51,7 @@ def moodle_notify():
         for quiz in quizzes:
             if currentTime <= int(quiz["timeclose"]) and currentTime >= int(quiz["timeopen"]):
                 closeTime = datetime.datetime.utcfromtimestamp(
-                    int(assingment['timeclose'])+GMT8).strftime('%Y-%m-%d %H:%M:%S')
+                    int(quiz['timeclose'])+GMT8).strftime('%Y-%m-%d %H:%M:%S')
                 lotify.send_message(
                     lineToken, f"{course['fullname']}\n考試: {quiz['name']}\nClose time: {closeTime}\nCheck it on moodle")
 
