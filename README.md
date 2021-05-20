@@ -1,6 +1,7 @@
 # MoodleNotify
 
-定時用Line提醒你Moodle上文件更新的好幫手
+定時用Line提醒你Moodle上文件更新的好幫手  
+MoodleNotify會在每天下午4點(GMT+8)時提醒你過去24小時在moodle上被修改過的檔案以及目前可以參與的考試
 
 ## 使用教學
 
