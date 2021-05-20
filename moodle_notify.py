@@ -33,7 +33,7 @@ def moodle_notify():
                 for content in module["contents"]:
                     if int(content["timemodified"]) >= currentTime-dayTime:
                         lotify.send_message(
-                            lineToken, f"{course['fullname']}\n{content['modplural']}: {module['name']}\nCheck it on moodle")
+                            lineToken, f"{course['fullname']}\n{module['modplural']}: {module['name']}\nCheck it on moodle")
         # assignments notify
         typeParams["wsfunction"] = "mod_assign_get_assignments"
         typeParams["courseids[0]"] = course["id"]
