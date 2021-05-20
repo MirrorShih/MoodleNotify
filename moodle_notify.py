@@ -43,12 +43,11 @@ def moodle_notify():
             if int(assingment["timemodified"]) >= currentTime-dayTime and currentTime <= int(assingment["duedate"]):
                 dueDate = datetime.datetime.utcfromtimestamp(
                     int(assingment['duedate'])+GMT8).strftime('%Y-%m-%d %H:%M:%S')
-                if assingment["duedate"] == 0:
-                    lotify.send_message(
-                        lineToken, f"{course['fullname']}\n作業: {assingment['name']}\nCheck it on moodle")
-                else:
-                    lotify.send_message(
-                        lineToken, f"{course['fullname']}\n作業: {assingment['name']}\nDue: {dueDate}\nCheck it on moodle")
+                lotify.send_message(
+                    lineToken, f"{course['fullname']}\n作業: {assingment['name']}\nDue: {dueDate}\nCheck it on moodle")
+            if int(assingment["timemodified"]) >= currentTime-dayTime and assingment["duedate"] == 0:
+                lotify.send_message(
+                    lineToken, f"{course['fullname']}\n作業: {assingment['name']}\nCheck it on moodle")
         # quiz notify
         typeParams["wsfunction"] = "mod_quiz_get_quizzes_by_courses"
         quizzes = requests.get(url, typeParams).json()["quizzes"]
