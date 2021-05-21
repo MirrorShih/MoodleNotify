@@ -9,7 +9,7 @@ def moodle_notify():
     lotify = Client()
     moodleToken = os.environ.get("MOODLE_TOKEN")
     lineToken = os.environ.get("LINE_TOKEN")
-    url = f"{os.environ.get('MOODLE_URL','https://moodle.ntust.edu.tw/')}webservice/rest/server.php"
+    url = f"{os.environ.get('MOODLE_URL')}webservice/rest/server.php"
     currentTime = int(time.time())
     dayTime = 86400
     GMT8 = 28800

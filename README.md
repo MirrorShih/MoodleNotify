@@ -17,7 +17,7 @@ MoodleNotify會在每天下午4點(GMT+8)時提醒你moodle上的新資訊
 ```
 MOODLE_TOKEN
 LINE_TOKEN
-MOODLE_URL (台科學生不需設定)
+MOODLE_URL
 ```
 
 #### MOODLE_TOKEN
@@ -42,7 +42,7 @@ MOODLE_URL (台科學生不需設定)
 
 複製權杖先記下來 等等會用到
 
-#### MOODLE_URL(台科學生不需設定)
+#### MOODLE_URL
 
 學校所使用的Moodle網址 如<https://moodle.ntust.edu.tw/>(結尾一定要是`/`)
 
@@ -52,33 +52,13 @@ MOODLE_URL (台科學生不需設定)
 
 按下上方部署按鈕並跟隨以下步驟
 
-#### 填入`app name`並按下`Deploy app`
+#### 填入`app name`和3個環境變數對應的值並按下`Deploy app`
 
 ![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/heroku_deploy.png)
 
 #### 等待`Deploy to Heroku`轉成綠色 按下`Manage App`
 
 ![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/manage.png)
-
-#### 進入管理頁面後按`Settings` 在設定頁面按`Reveal Config Vars`
-
-![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/config_vars.png)
-
-#### 在這加入剛剛提到的環境變數
-
-#### KEY填以下三個值
-
-#### VALUE填相對應的TOKEN或URL
-
-#### 如果是台科學生則可不填MOODLE_URL
-
-```
-MOODLE_TOKEN
-LINE_TOKEN
-MOODLE_URL
-```
-
-![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/Vars.png)
 
 #### 最後來到`Resources`把服務打開就可以了
 
