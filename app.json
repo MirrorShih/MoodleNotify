@@ -6,14 +6,9 @@
         "python"
     ],
     "env": {
-        "MOODLE_TOKEN": {
-            "description": "moodle token"
-        },
-        "LINE_TOKEN": {
-            "description": "line token"
-        },
+        "MOODLE_TOKEN": {},
+        "LINE_TOKEN": {},
         "MOODLE_URL": {
-            "description": "moodle url",
             "value": "https://moodle.ntust.edu.tw/"
         }
     }
