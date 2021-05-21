@@ -4,5 +4,17 @@
     "keywords": [
         "LINE",
         "python"
-    ]
+    ],
+    "env": {
+        "MOODLE_TOKEN": {
+            "description": "moodle token"
+        },
+        "LINE_TOKEN": {
+            "description": "line token"
+        },
+        "MOODLE_URL": {
+            "description": "moodle url",
+            "value": "https://moodle.ntust.edu.tw/"
+        }
+    }
 }
