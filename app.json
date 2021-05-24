@@ -10,6 +10,10 @@
         "LINE_TOKEN": {},
         "MOODLE_URL": {
             "value": "https://moodle.ntust.edu.tw/"
+        },
+        "NOTIFY_TIME": {
+            "description": "MoodleNotify提醒你的時間,設定是24小時制,ex:16就是在下午四點提醒你",
+            "value": "16"
         }
     }
 }
