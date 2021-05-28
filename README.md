@@ -25,7 +25,10 @@ NOTIFY_TIME
 
 將下面超連結的`YourMoodleURL`改成你學校的Moodle網址 `ex:moodle.ntust.edu.tw`  
 `YourUsername`改成你的Moodle username  
-`YourPassword`改成你的Moodle password
+`YourPassword`改成你的Moodle password  
+如果你的密碼有特殊字元導致你拿不到token  
+請到 https://www.urldecoder.org/ 把你的特殊字元做decode  
+再把你decode的結果替換掉密碼中原本的特殊字元 如`#`換成`%23`
 
 <https://YourMoodleURL/login/token.php?username=YourUsername&password=YourPassword&service=moodle_mobile_app>
 
