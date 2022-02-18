@@ -22,17 +22,47 @@ NOTIFY_TIME
 ```
 
 #### MOODLE_TOKEN
-
+這邊提供兩種方法，建議使用第一種
 將下面超連結的`YourMoodleURL`改成你學校的Moodle網址 `ex:moodle.ntust.edu.tw`  
 `YourUsername`改成你的Moodle username  
 `YourPassword`改成你的Moodle password  
-如果你的密碼有特殊字元導致你拿不到token  
-請到 https://www.urldecoder.org/ 把你的特殊字元做decode  
-再把你decode的結果替換掉密碼中原本的特殊字元 如`#`換成`%23`
+
+##### 1. 
+
+第一種方法根據作業系統有一點差異  
+
+###### Windows  
+
+打開cmd(命令提示字元)  
+輸入如下
+```
+curl "https://YourMoodleURL/login/token.php?service=moodle_mobile_app" -d "username=YourUsername&password=YourPassword"
+```
+
+###### Linux  
+
+打開terminal
+輸入如下
+```
+curl -X POST -d 'username=YourUsername&password=YourPassword' https://YourMoodleURL/login/token.php?service=moodle_mobile_app
+```
+
+###### Mac
+打開terminal
+輸入如下
+```
+curl -X POST -d 'username=YourUsername&password=YourPassword' https://YourMoodleURL/login/token.php?service=moodle_mobile_app
+```
+
+##### 2.
 
 <https://YourMoodleURL/login/token.php?username=YourUsername&password=YourPassword&service=moodle_mobile_app>
 
 在瀏覽器送出會拿到屬於你的`MOODLE_TOKEN` 先記下來等等會用到
+
+如果你的密碼有特殊字元導致你拿不到token  
+請到 https://www.urldecoder.org/ 把你的特殊字元做decode  
+再把你decode的結果替換掉密碼中原本的特殊字元 如`#`換成`%23`
 
 #### LINE_TOKEN
 
