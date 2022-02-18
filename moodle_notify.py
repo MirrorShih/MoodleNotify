@@ -15,16 +15,16 @@ def moodle_notify():
     GMT8 = 28800
     params = {"moodlewsrestformat": "json",
               "wsfunction": "core_webservice_get_site_info", "wstoken": moodleToken}
-    userId = requests.get(url, params).json()["userid"]
+    userId = requests.post(url, params).json()["userid"]
     params["wsfunction"] = "core_enrol_get_users_courses"
     params["userid"] = userId
-    courses = requests.get(url, params).json()
+    courses = requests.post(url, params).json()
     params["wsfunction"] = "core_course_get_contents"
     params.pop("userid")
     typeParams = {"moodlewsrestformat": "json", "wstoken": moodleToken}
     for course in courses:
         params["courseid"] = course["id"]
-        courseContent = requests.get(url, params).json()
+        courseContent = requests.post(url, params).json()
         for i in courseContent:
             modules = i["modules"]
             for module in modules:
@@ -37,7 +37,7 @@ def moodle_notify():
         # assignments notify
         typeParams["wsfunction"] = "mod_assign_get_assignments"
         typeParams["courseids[0]"] = course["id"]
-        assignments = requests.get(url, typeParams).json()[
+        assignments = requests.post(url, typeParams).json()[
             "courses"][0]["assignments"]
         for assingment in assignments:
             if int(assingment["timemodified"]) >= currentTime-dayTime and currentTime <= int(assingment["duedate"]):
@@ -50,7 +50,7 @@ def moodle_notify():
                     lineToken, f"{course['fullname']}\n作業: {assingment['name']}\nCheck it on moodle")
         # quiz notify
         typeParams["wsfunction"] = "mod_quiz_get_quizzes_by_courses"
-        quizzes = requests.get(url, typeParams).json()["quizzes"]
+        quizzes = requests.post(url, typeParams).json()["quizzes"]
         for quiz in quizzes:
             if currentTime <= int(quiz["timeclose"]) and int(quiz["timeopen"]) >= currentTime-dayTime:
                 closeTime = datetime.datetime.utcfromtimestamp(
