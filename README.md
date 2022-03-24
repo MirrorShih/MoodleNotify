@@ -101,3 +101,43 @@ MoodleNotify提醒你的時間 為24小時制 設定16就是下午四點 8就是
 #### 最後來到`Resources`把服務打開就可以了
 
 ![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/resources.png)
+
+### Docker
+
+如果您有使用Docker的話，可以試著將MoodleNotify架設在Docker上，以下指令請在終端機操作。
+
+#### 架設MoodleNotify
+
+##### 1. 首先請自行下載此專案
+```bash
+git clone https://github.com/MirrorShih/MoodleNotify.git
+```
+
+##### 2. 打開Dockerfile，將上述提到的環境變數填入到第15~18行中對應的位置，接著把`#`註解去掉，更改完的結果會是下面的樣子
+```dockerfile
+# Environment Variables
+ENV MOODLE_TOEKN=(Your MOODLE_TOKEN)
+ENV LINE_TOKEN=(Your LINE_TOKEN)
+ENV MOODLE_URL=(Your MOODLE_URL)
+ENV NOTIFY_TIME=(Your NOTIFY_TIME)
+```
+
+##### 3. 修改完Dockerfile之後，輸入以下指令建立映像檔
+```bash
+sudo docker build -t moodle_notify:latest .
+```
+
+##### 4. 完成映像檔之後建立容器執行
+```bash
+sudo docker run -d --name moodle_notify moodle_notify:latest
+```
+
+這樣就大功告成了。
+
+#### 移除MoodleNotify
+
+若您需要將MoodleNotify移除，則請輸入以下指令將容器以及映像檔移除
+```bash
+sudo docker rm -f moodle_notify
+sudo docker rmi moodle_notify
+```
