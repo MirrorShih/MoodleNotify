@@ -104,7 +104,7 @@ MoodleNotify提醒你的時間 為24小時制 設定16就是下午四點 8就是
 
 ### Docker
 
-如果您有使用Docker的話，可以試著將MoodleNotify架設在Docker上，以下指令請在終端機操作。
+如果您有在您的機器上使用Docker的話，可以試著將MoodleNotify架設在您自己的機器上，以下指令請在終端機操作。
 
 #### 架設MoodleNotify
 
