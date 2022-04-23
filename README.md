@@ -68,11 +68,11 @@ curl -X POST -d 'username=YourUsername&password=YourPassword' https://YourMoodle
 
 點擊 [LINE Notify](https://notify-bot.line.me/my/) 在頁面最下方點擊`發行權杖`
 
-![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/Line_token.png)
+![alt text](assets/Line_token.png)
 
 權杖名稱填入`MoodleNotify` 選擇`透過1對1聊天接收LINE Notify的通知`並發行
 
-![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/Line_token_settings.png)
+![alt text](assets/Line_token_settings.png)
 
 複製權杖先記下來 等等會用到
 
@@ -92,15 +92,15 @@ MoodleNotify提醒你的時間 為24小時制 設定16就是下午四點 8就是
 
 #### 填入`app name`和4個環境變數對應的值並按下`Deploy app`
 
-![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/heroku_deploy.png)
+![alt text](assets/heroku_deploy.png)
 
 #### 等待`Deploy to Heroku`轉成綠色 按下`Manage App`
 
-![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/manage.png)
+![alt text](assets/manage.png)
 
 #### 最後來到`Resources`把服務打開就可以了
 
-![alt text](https://github.com/MirrorShih/MoodleNotify/blob/main/assets/resources.png)
+![alt text](assets/resources.png)
 
 ### Docker
 
