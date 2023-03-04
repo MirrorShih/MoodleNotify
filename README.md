@@ -7,7 +7,7 @@ MoodleNotify will remind you daily of new information on Moodle, including:
 
 #### 1.Files that have been modified within the last 24 hours
 
-#### Assignments that have been modified within the last 24 hours and are still available for submission
+#### 2.Assignments that have been modified within the last 24 hours and are still available for submission
 
 #### 3.Exams that have started within the last 24 hours and are still available for taking.
 
