@@ -1,5 +1,7 @@
 # MoodleNotify
 
+[Chinese traditional version](README-zh_TW.md)
+
 A great assistant for reminding you of document updates on Moodle through Line notifications.
 MoodleNotify will remind you daily of new information on Moodle, including:
 
